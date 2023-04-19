@@ -1,0 +1,2 @@
+level: log, messages: number
+level: log, messages: string
