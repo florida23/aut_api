@@ -24,7 +24,7 @@ jobs:
              npm install -g allure-commandline --save-dev |
              npm install -g newman-reporter-allure 
 
-      # 2 -Step - Run the POSTMAN collection
+      ## 2 -Step - Run the POSTMAN collection
       - name: Step 2 - Run POSTMAN collection
         if: always()
         continue-on-error: true
