@@ -413,7 +413,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa=10",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa=",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -426,7 +426,7 @@
 											"query": [
 												{
 													"key": "idPessoa",
-													"value": "10"
+													"value": ""
 												}
 											]
 										}
@@ -473,11 +473,12 @@
 													"    pm.expect(responseJson.idTipoTelefone).to.be.oneOf([1, 2, 3]);\r",
 													"});\r",
 													"\r",
-													"\r",
-													"\r",
-													"\r",
-													"\r",
-													"   "
+													"pm.test(\"Buscar por ID existente e valida se o id na resposta é mesmo informado na busca\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData.id).to.eql(2879);\r",
+													"});\r",
+													"   \r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -499,7 +500,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones/23",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones/2879",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -508,7 +509,7 @@
 												"telefones",
 												"api",
 												"telefones",
-												"23"
+												"2879"
 											]
 										}
 									},
