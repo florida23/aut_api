@@ -1,0 +1,38 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+const responseJson = pm.response.json();
+pm.test("Campo 'id' não é vazio", function () {
+   pm.expect(responseJson.id).not.to.equal("");
+ });
+
+ pm.test("Campo 'id' está presente", function () {
+   pm.expect(responseJson).to.have.property("id");
+ });
+
+ pm.test("Campo 'id' é numérico", function (){ 
+    pm.expect(responseJson.id).to.be.a("number");
+ });
+
+pm.test("Campo 'idTipoTelefone' não é vazio", function () {
+   pm.expect(responseJson.idTipoTelefone).not.to.equal("");
+ });
+
+ pm.test("Campo 'idTipoTelefone' está presente", function () {
+   pm.expect(responseJson).to.have.property("idTipoTelefone");
+ });
+
+ pm.test("Campo 'idTipoTelefone' é numérico", function (){ 
+    pm.expect(responseJson.idTipoTelefone).to.be.a("number");
+ });
+
+pm.test("Check 'idTipoTelefone' 1, 2 ou 3", function() {
+    pm.expect(responseJson.idTipoTelefone).to.be.oneOf([1, 2, 3]);
+});
+
+pm.test("Buscar por ID existente e valida se o id na resposta é mesmo informado na busca", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.id).to.eql(2879);
+});
+   
