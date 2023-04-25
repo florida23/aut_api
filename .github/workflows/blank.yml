@@ -66,7 +66,7 @@ jobs:
         # Required mail subject:
          subject: Github Actions test job result
         # Required recipients' addresses:
-         to: Jefferson.barbieri@outtech.com.br,giovanna.maioque@projecti.com.br,,bruna.capelli@inmetrics.com.br,elisangelasqa@gmail.com
+         to: Jefferson.barbieri@outtech.com.br,giovanna.maioque@projecti.com.br,bruna.capelli@Inmetrics.com.br,elisangelasqa@gmail.com
         # Required sender full name (address can be skipped):
          from: projetoflorida23@gmail.com
         # Optional plain body:
