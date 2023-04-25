@@ -1,0 +1,264 @@
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Buscar por ID existente e valida se o id na resposta é mesmo informado na busca", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.content[0].idPessoa).to.eql(1444);
+});
+  
+ const schema = {
+   "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "content",
+        "first",
+        "firstPage",
+        "hasContent",
+        "hasNextPage",
+        "hasPreviousPage",
+        "last",
+        "nextPage",
+        "number",
+        "numberOfElements",
+        "previousPage",
+        "size",
+        "totalElements",
+        "totalPages"
+    ],
+    "properties": {
+        "content": {
+            "type": "array",
+            "default": [],
+            "title": "The content Schema",
+            "items": {
+                "type": "object",
+                "default": {},
+                "title": "A Schema",
+                "required": [
+                    "id",
+                    "idTipoTelefone",
+                    "idPessoa",
+                    "ddd",
+                    "telefone",
+                    "ramal",
+                    "status"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "The id Schema",
+                        "examples": [
+                            2879
+                        ]
+                    },
+                    "idTipoTelefone": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "The idTipoTelefone Schema",
+                        "examples": [
+                            3
+                        ]
+                    },
+                    "idPessoa": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "The idPessoa Schema",
+                        "examples": [
+                            1444
+                        ]
+                    },
+                    "ddd": {
+                        "type": "string",
+                        "default": "",
+                        "title": "The ddd Schema",
+                        "examples": [
+                            "11"
+                        ]
+                    },
+                    "telefone": {
+                        "type": "string",
+                        "default": "",
+                        "title": "The telefone Schema",
+                        "examples": [
+                            "991886199"
+                        ]
+                    },
+                    "ramal": {
+                        "type": "string",
+                        "default": "",
+                        "title": "The ramal Schema",
+                        "examples": [
+                            "1234"
+                        ]
+                    },
+                    "status": {
+                        "type": "integer",
+                        "default": 0,
+                        "title": "The status Schema",
+                        "examples": [
+                            1
+                        ]
+                    }
+                },
+                "examples": [{
+                    "id": 2879,
+                    "idTipoTelefone": 3,
+                    "idPessoa": 1444,
+                    "ddd": "11",
+                    "telefone": "991886199",
+                    "ramal": "1234",
+                    "status": 1
+                }]
+            },
+            "examples": [
+                [{
+                    "id": 2879,
+                    "idTipoTelefone": 3,
+                    "idPessoa": 1444,
+                    "ddd": "11",
+                    "telefone": "991886199",
+                    "ramal": "1234",
+                    "status": 1
+                }]
+            ]
+        },
+        "first": {
+            "type": "boolean",
+            "default": false,
+            "title": "The first Schema",
+            "examples": [
+                true
+            ]
+        },
+        "firstPage": {
+            "type": "boolean",
+            "default": false,
+            "title": "The firstPage Schema",
+            "examples": [
+                true
+            ]
+        },
+        "hasContent": {
+            "type": "boolean",
+            "default": false,
+            "title": "The hasContent Schema",
+            "examples": [
+                true
+            ]
+        },
+        "hasNextPage": {
+            "type": "boolean",
+            "default": false,
+            "title": "The hasNextPage Schema",
+            "examples": [
+                false
+            ]
+        },
+        "hasPreviousPage": {
+            "type": "boolean",
+            "default": false,
+            "title": "The hasPreviousPage Schema",
+            "examples": [
+                false
+            ]
+        },
+        "last": {
+            "type": "boolean",
+            "default": false,
+            "title": "The last Schema",
+            "examples": [
+                true
+            ]
+        },
+        "nextPage": {
+            "type": "integer",
+            "default": 0,
+            "title": "The nextPage Schema",
+            "examples": [
+                0
+            ]
+        },
+        "number": {
+            "type": "integer",
+            "default": 0,
+            "title": "The number Schema",
+            "examples": [
+                0
+            ]
+        },
+        "numberOfElements": {
+            "type": "integer",
+            "default": 0,
+            "title": "The numberOfElements Schema",
+            "examples": [
+                1
+            ]
+        },
+        "previousPage": {
+            "type": "integer",
+            "default": 0,
+            "title": "The previousPage Schema",
+            "examples": [
+                0
+            ]
+        },
+        "size": {
+            "type": "integer",
+            "default": 0,
+            "title": "The size Schema",
+            "examples": [
+                1
+            ]
+        },
+        "totalElements": {
+            "type": "integer",
+            "default": 0,
+            "title": "The totalElements Schema",
+            "examples": [
+                1
+            ]
+        },
+        "totalPages": {
+            "type": "integer",
+            "default": 0,
+            "title": "The totalPages Schema",
+            "examples": [
+                1
+            ]
+        }
+    },
+    "examples": [{
+        "content": [{
+            "id": 2879,
+            "idTipoTelefone": 3,
+            "idPessoa": 1444,
+            "ddd": "11",
+            "telefone": "991886199",
+            "ramal": "1234",
+            "status": 1
+        }],
+        "first": true,
+        "firstPage": true,
+        "hasContent": true,
+        "hasNextPage": false,
+        "hasPreviousPage": false,
+        "last": true,
+        "nextPage": 0,
+        "number": 0,
+        "numberOfElements": 1,
+        "previousPage": 0,
+        "size": 1,
+        "totalElements": 1,
+        "totalPages": 1
+    }]
+}
+
+pm.test("Validar a estrutura do corpo", function () {
+    pm.response.to.have.jsonSchema(schema);
+});
+   
+ 

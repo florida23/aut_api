@@ -1,0 +1,129 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+const responseJson = pm.response.json();
+pm.test("Campo 'id' não é vazio", function () {
+   pm.expect(responseJson.id).not.to.equal("");
+ });
+
+ pm.test("Campo 'id' está presente", function () {
+   pm.expect(responseJson).to.have.property("id");
+ });
+
+ pm.test("Campo 'id' é numérico", function (){ 
+    pm.expect(responseJson.id).to.be.a("number");
+ });
+
+pm.test("Campo 'idTipoTelefone' não é vazio", function () {
+   pm.expect(responseJson.idTipoTelefone).not.to.equal("");
+ });
+
+ pm.test("Campo 'idTipoTelefone' está presente", function () {
+   pm.expect(responseJson).to.have.property("idTipoTelefone");
+ });
+
+ pm.test("Campo 'idTipoTelefone' é numérico", function (){ 
+    pm.expect(responseJson.idTipoTelefone).to.be.a("number");
+ });
+
+pm.test("Check 'idTipoTelefone' 1, 2 ou 3", function() {
+    pm.expect(responseJson.idTipoTelefone).to.be.oneOf([1, 2, 3]);
+});
+
+pm.test("Buscar por ID existente e validar se o id da resposta é mesmo informado na busca", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.id).to.eql(2879);
+});
+
+pm.test("A resposta é valida e deve ter um corpo", function () {
+     pm.response.to.be.ok;
+     pm.response.to.be.withBody;
+     pm.response.to.be.json;
+});
+
+const schema = {
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "id",
+        "idTipoTelefone",
+        "idPessoa",
+        "ddd",
+        "telefone",
+        "ramal",
+        "status"
+    ],
+    "properties": {
+        "id": {
+            "type": "integer",
+            "default": 0,
+            "title": "The id Schema",
+            "examples": [
+                2879
+            ]
+        },
+        "idTipoTelefone": {
+            "type": "integer",
+            "default": 0,
+            "title": "The idTipoTelefone Schema",
+            "examples": [
+                3
+            ]
+        },
+        "idPessoa": {
+            "type": "integer",
+            "default": 0,
+            "title": "The idPessoa Schema",
+            "examples": [
+                1444
+            ]
+        },
+        "ddd": {
+            "type": "string",
+            "default": "",
+            "title": "The ddd Schema",
+            "examples": [
+                "11"
+            ]
+        },
+        "telefone": {
+            "type": "string",
+            "default": "",
+            "title": "The telefone Schema",
+            "examples": [
+                "991886199"
+            ]
+        },
+        "ramal": {
+            "type": "string",
+            "default": "",
+            "title": "The ramal Schema",
+            "examples": [
+                "1234"
+            ]
+        },
+        "status": {
+            "type": "integer",
+            "default": 0,
+            "title": "The status Schema",
+            "examples": [
+                1
+            ]
+        }
+    },
+    "examples": [{
+        "id": 2879,
+        "idTipoTelefone": 3,
+        "idPessoa": 1444,
+        "ddd": "11",
+        "telefone": "991886199",
+        "ramal": "1234",
+        "status": 1
+    }]
+}
+pm.test("Validar a estrutura do corpo", function () {
+    pm.response.to.have.jsonSchema(schema);
+});
+   
