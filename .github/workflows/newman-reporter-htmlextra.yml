@@ -1,4 +1,4 @@
-name: Automation API Tests from Postman Collection ci-integração.
+name: htmlextra >> Automation API Tests from Postman Collection ci-integração.
 
 on:
   push:
@@ -28,8 +28,7 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-             newman run Florida_Release_Notes.postman_collection.json -e CI-test.postman_environment.json -r htmlextra --reporter-htmlextra-title "API AUTOMATION" --reporter-htmlextra-export testResults/index.html \
-                --timeout-request 45000 --delay-request 600 --suppress-exit-code
+             newman run Florida_Release_Notes.postman_collection.json -e CI-test.postman_environment.json -r htmlextra --reporter-htmlextra-title "API AUTOMATION" --reporter-htmlextra-export testResults/index.html --timeout-request 45000 --delay-request 600 --suppress-exit-code
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
