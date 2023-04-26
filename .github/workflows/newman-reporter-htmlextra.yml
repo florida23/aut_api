@@ -28,7 +28,7 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-             newman run Florida_Release_Notes.postman_collection.json -e CI-test.postman_environment.json -r htmlextra --reporter-htmlextra-title "API AUTOMATION" --reporter-htmlextra-export testResults/index.html --timeout-request 45000 --delay-request 600 --suppress-exit-code
+             newman run Florida_Release_Notes.postman_collection.json -e CI-test.postman_environment.json -r htmlextra --reporter-htmlextra-title "API AUTOMATION" --reporter-htmlextra-export testResults/automated_ci_integracao.html --timeout-request 45000 --delay-request 600 --suppress-exit-code
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -54,7 +54,7 @@ jobs:
         # Required mail subject:
          subject: Github Actions test job result
         # Required recipients' addresses:
-         to: Jefferson.barbieri@outtech.com.br,giovanna.maioque@projecti.com.br,bruna.capelli@Inmetrics.com.br,elisangelasqa@gmail.com,silvio.aulik@gmail.com,reiload@gmail.com
+         to: pio.s.bruna@gmail.com,silvio.aulik@gmail.com
         # Required sender full name (address can be skipped):
          from: projetoflorida23@gmail.com
         # Optional plain body:
