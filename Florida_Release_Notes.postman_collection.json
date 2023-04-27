@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4f562c53-af42-411e-bb42-0100fccc67d1",
+		"_postman_id": "dac59931-a68c-45ad-8cb3-23ff34d01e02",
 		"name": "Florida_Release_Notes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "4827236"
+		"_exporter_id": "1339439"
 	},
 	"item": [
 		{
@@ -1166,15 +1166,142 @@
 									"response": []
 								},
 								{
-									"name": "PIER055 - GET: /api/pessoas-detalhes/",
+									"name": "PIER055[Positive] - GET: /api/pessoas-detalhes/",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"pm.test(\"Status code is 200\", function () {\r",
-													"    pm.response.to.have.status(200);\r",
-													"});"
+													"\r",
+													"    pm.test(\"Validar a estrutura do schema\", function () {\r",
+													"        var jsonData = pm.response.json();\r",
+													"        var schema = pm.variables.get(\"schema\");\r",
+													"        var isSchemaValid = tv4.validate(jsonData, schema);\r",
+													"        if(!isSchemaValid)\r",
+													"          console.error(tv4.error);\r",
+													"          pm.expect(isSchemaValid).to.be.true;\r",
+													"    });\r",
+													"\r",
+													"    pm.test(\"Validar o formato do campo email\", function () {\r",
+													"        var data = pm.response.json();\r",
+													"        pm.expect(data.email).to.match(/^[A-Za-z0-9_!#$%&'*+\\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/);\r",
+													"\r",
+													"    });\r",
+													"\r",
+													"    pm.test(\"Validar a comparação idPessoa entre Request e Response\", function () {\r",
+													"       var url = pm.request.url.toString();\r",
+													"       var value = url.split(\"/\");\r",
+													"       for(var x=0; x<=value.length-1; x++){\r",
+													"           if(value[x].match(value[x], /^[0-9]+$/)){\r",
+													"               var requestIdUrl = value[x].toString();\r",
+													"           }\r",
+													"       }\r",
+													"       var respondeIdPessoa = pm.response.json();\r",
+													"       pm.expect(respondeIdPessoa.idPessoa).to.equal(parseInt(requestIdUrl));\r",
+													"       \r",
+													"    });\r",
+													"\r",
+													"    pm.test(\"Validar a quantidade de campos do schema com o response\", function () {\r",
+													"        const responseJson = pm.response.json();\r",
+													"        var countResponse = Object.keys(responseJson).length;\r",
+													"        const schema = pm.variables.get(\"schema\");\r",
+													"        var parseSchema = JSON.parse(JSON.stringify(schema.properties));\r",
+													"        var countSchema = Object.keys(parseSchema).length;\r",
+													"        pm.expect(countResponse).to.equal(countSchema);\r",
+													"       \r",
+													"    });\r",
+													"\r",
+													"    pm.test(\"GET Status code is 200\", function () {\r",
+													"        pm.response.to.have.status(200);\r",
+													"    });\r",
+													"    pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"        pm.response.to.be.ok;\r",
+													"        pm.response.to.be.withBody;\r",
+													"        pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"pm.variables.set(\"schema\",\r",
+													"{\r",
+													"  \"title\": \"Generated schema for Root\",\r",
+													"  \"type\": \"object\",\r",
+													"  \"properties\": {\r",
+													"    \"idPessoa\": {\r",
+													"      \"type\": \"number\"\r",
+													"    },\r",
+													"    \"nomeMae\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"idEstadoCivil\": {\r",
+													"      \"type\": \"number\"\r",
+													"    },\r",
+													"    \"idNacionalidade\": {\r",
+													"      \"type\": \"number\"\r",
+													"    },\r",
+													"    \"email\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"salario\": {\r",
+													"      \"type\": \"number\"\r",
+													"    },\r",
+													"    \"impedidoFinanciamento\": {\r",
+													"      \"type\": \"boolean\"\r",
+													"    },\r",
+													"    \"naturalidadeCidade\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"naturalidadeEstado\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"grauInstrucao\": {\r",
+													"      \"type\": \"number\"\r",
+													"    },\r",
+													"    \"nomePai\": {\r",
+													"      \"type\": \"string\"\r",
+													"    },\r",
+													"    \"pessoaPoliticamenteExposta\": {\r",
+													"      \"type\": \"boolean\"\r",
+													"    },\r",
+													"    \"patrimonioTotal\": {\r",
+													"      \"type\": \"number\"\r",
+													"    },\r",
+													"    \"flagNomePaiNaoInformado\": {\r",
+													"      \"type\": \"boolean\"\r",
+													"    },\r",
+													"    \"flagSemEnderecoComercialFixo\": {\r",
+													"      \"type\": \"boolean\"\r",
+													"    }\r",
+													"  },\r",
+													"  \"required\": [\r",
+													"    \"idPessoa\",\r",
+													"    \"nomeMae\",\r",
+													"    \"idEstadoCivil\",\r",
+													"    \"idNacionalidade\",\r",
+													"    \"email\",\r",
+													"    \"salario\",\r",
+													"    \"impedidoFinanciamento\",\r",
+													"    \"naturalidadeCidade\",\r",
+													"    \"naturalidadeEstado\",\r",
+													"    \"grauInstrucao\",\r",
+													"    \"nomePai\",\r",
+													"    \"pessoaPoliticamenteExposta\",\r",
+													"    \"patrimonioTotal\",\r",
+													"    \"flagNomePaiNaoInformado\",\r",
+													"    \"flagSemEnderecoComercialFixo\"\r",
+													"  ]\r",
+													"}\r",
+													");\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -1184,7 +1311,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/3232",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -1193,7 +1320,7 @@
 												"pessoas-detalhes",
 												"api",
 												"pessoas-detalhes",
-												"3232"
+												"1598"
 											]
 										}
 									},
@@ -2195,6 +2322,28 @@
 					]
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "current",
+			"value": ""
+		},
+		{
+			"key": "ids",
+			"value": ""
+		},
+		{
+			"key": "requests",
+			"value": ""
+		},
+		{
+			"key": "count",
+			"value": ""
+		},
+		{
+			"key": "id",
+			"value": ""
 		}
 	]
 }
