@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "dac59931-a68c-45ad-8cb3-23ff34d01e02",
+		"_postman_id": "4f562c53-af42-411e-bb42-0100fccc67d1",
 		"name": "Florida_Release_Notes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "1339439"
+		"_exporter_id": "4827236"
 	},
 	"item": [
 		{
@@ -97,7 +97,7 @@
 											}
 										},
 										"url": {
-											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=264&idTipoEndereco=1&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=AGuiar",
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=264&idTipoEndereco=1&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=Aguiar",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -166,7 +166,7 @@
 												},
 												{
 													"key": "usuarioAlteracao",
-													"value": "AGuiar"
+													"value": "Aguiar"
 												}
 											]
 										}
@@ -346,7 +346,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=1323&ddd=11&telefone=991882511&ramal=10",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=1323&ddd=11&telefone=991882511&ramal=",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -375,7 +375,159 @@
 												},
 												{
 													"key": "ramal",
-													"value": "10"
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER138 - POST: /api/telefones_letra(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Valida mensagem de erro\", function () {\r",
+													"    var responseBody = pm.response.json();\r",
+													"    pm.expect(responseBody.error.message).to.equal(\"Erro ao validar os dados de entrada.\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var letra = \"A23\";\r",
+													"pm.globals.set(\"letra\", letra);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=1323&ddd=11&telefone=991882511&ramal={{letra}}",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idTipoTelefone",
+													"value": "1"
+												},
+												{
+													"key": "idPessoa",
+													"value": "1323"
+												},
+												{
+													"key": "ddd",
+													"value": "11"
+												},
+												{
+													"key": "telefone",
+													"value": "991882511"
+												},
+												{
+													"key": "ramal",
+													"value": "{{letra}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER138 - POST: /api/telefones_branco(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Valida mensagem de erro\", function () {\r",
+													"    var responseBody = pm.response.json();\r",
+													"    pm.expect(responseBody.error.message).to.equal(\"Erro ao validar os dados de entrada.\");\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var letra = \"A23\";\r",
+													"pm.globals.set(\"letra\", letra);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=1323&ddd=11&telefone=991882511&ramal={{letra}}",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idTipoTelefone",
+													"value": "1"
+												},
+												{
+													"key": "idPessoa",
+													"value": "1323"
+												},
+												{
+													"key": "ddd",
+													"value": "11"
+												},
+												{
+													"key": "telefone",
+													"value": "991882511"
+												},
+												{
+													"key": "ramal",
+													"value": "{{letra}}"
 												}
 											]
 										}
@@ -696,6 +848,193 @@
 									"response": []
 								},
 								{
+									"name": "PIER137 - GET: /api/telefones_idPessoa_vazio(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Valida mensagem de erro\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData.error.errors[0].message).to.eql(\"deve ser um número\");\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa=",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER137 - GET: /api/telefones_idPessoa_inexistente(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"\r",
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Valida mensagem de erro\", function () {\r",
+													"    var responseBody = pm.response.json();\r",
+													"    pm.expect(responseBody.error.message).to.equal(\"O participante informado é inexistente.\");\r",
+													"});\r",
+													"\r",
+													"pm.test(`O número aleatório gerado é ${pm.variables.get(\"randomId\")}`, function () {\r",
+													"   \r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var randomId = Math.floor(Math.random() * 15151515) + 1;\r",
+													"pm.globals.set(\"randomId\", randomId);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa={{randomId}}",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "{{randomId}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER137 - GET: /api/telefones_idPessoa_letra(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar a mensagem de erro\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData.error.errors[0].message).to.eql(\"deve ser um número\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idPessoa=A",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "A"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "PIER140 - GET: /api/telefones/id",
 									"event": [
 										{
@@ -831,6 +1170,17 @@
 													"    pm.response.to.have.jsonSchema(schema);\r",
 													"});\r",
 													"   \r",
+													"\r",
+													"   \r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
 													""
 												],
 												"type": "text/javascript"
@@ -863,6 +1213,122 @@
 												"api",
 												"telefones",
 												"2879"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER140 - GET: /api/telefones/id_inexistente(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Valida mensagem de erro\", function () {\r",
+													"    var responseBody = pm.response.json();\r",
+													"    pm.expect(responseBody.error.message).to.equal(\"O id informado é inexistente.\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta deve ser em formato Json\", function () {\r",
+													"      pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones/1",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER140 - GET: /api/telefones/em_branco(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Valida mensagem de erro\", function () {\r",
+													"    var responseBody = pm.response.json();\r",
+													"    pm.expect(responseBody.error.message).to.equal(\"Query string parameters ausentes.\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta deve ser em formato Json\", function () {\r",
+													"      pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones/",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones",
+												""
 											]
 										}
 									},
@@ -1166,142 +1632,15 @@
 									"response": []
 								},
 								{
-									"name": "PIER055[Positive] - GET: /api/pessoas-detalhes/",
+									"name": "PIER055 - GET: /api/pessoas-detalhes/",
 									"event": [
 										{
 											"listen": "test",
 											"script": {
 												"exec": [
-													"\r",
-													"    pm.test(\"Validar a estrutura do schema\", function () {\r",
-													"        var jsonData = pm.response.json();\r",
-													"        var schema = pm.variables.get(\"schema\");\r",
-													"        var isSchemaValid = tv4.validate(jsonData, schema);\r",
-													"        if(!isSchemaValid)\r",
-													"          console.error(tv4.error);\r",
-													"          pm.expect(isSchemaValid).to.be.true;\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"Validar o formato do campo email\", function () {\r",
-													"        var data = pm.response.json();\r",
-													"        pm.expect(data.email).to.match(/^[A-Za-z0-9_!#$%&'*+\\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/);\r",
-													"\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"Validar a comparação idPessoa entre Request e Response\", function () {\r",
-													"       var url = pm.request.url.toString();\r",
-													"       var value = url.split(\"/\");\r",
-													"       for(var x=0; x<=value.length-1; x++){\r",
-													"           if(value[x].match(value[x], /^[0-9]+$/)){\r",
-													"               var requestIdUrl = value[x].toString();\r",
-													"           }\r",
-													"       }\r",
-													"       var respondeIdPessoa = pm.response.json();\r",
-													"       pm.expect(respondeIdPessoa.idPessoa).to.equal(parseInt(requestIdUrl));\r",
-													"       \r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"Validar a quantidade de campos do schema com o response\", function () {\r",
-													"        const responseJson = pm.response.json();\r",
-													"        var countResponse = Object.keys(responseJson).length;\r",
-													"        const schema = pm.variables.get(\"schema\");\r",
-													"        var parseSchema = JSON.parse(JSON.stringify(schema.properties));\r",
-													"        var countSchema = Object.keys(parseSchema).length;\r",
-													"        pm.expect(countResponse).to.equal(countSchema);\r",
-													"       \r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"GET Status code is 200\", function () {\r",
-													"        pm.response.to.have.status(200);\r",
-													"    });\r",
-													"    pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
-													"        pm.response.to.be.ok;\r",
-													"        pm.response.to.be.withBody;\r",
-													"        pm.response.to.be.json;\r",
-													"});\r",
-													"\r",
-													"\r",
-													"\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													"pm.variables.set(\"schema\",\r",
-													"{\r",
-													"  \"title\": \"Generated schema for Root\",\r",
-													"  \"type\": \"object\",\r",
-													"  \"properties\": {\r",
-													"    \"idPessoa\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"nomeMae\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"idEstadoCivil\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"idNacionalidade\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"email\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"salario\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"impedidoFinanciamento\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    },\r",
-													"    \"naturalidadeCidade\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"naturalidadeEstado\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"grauInstrucao\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"nomePai\": {\r",
-													"      \"type\": \"string\"\r",
-													"    },\r",
-													"    \"pessoaPoliticamenteExposta\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    },\r",
-													"    \"patrimonioTotal\": {\r",
-													"      \"type\": \"number\"\r",
-													"    },\r",
-													"    \"flagNomePaiNaoInformado\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    },\r",
-													"    \"flagSemEnderecoComercialFixo\": {\r",
-													"      \"type\": \"boolean\"\r",
-													"    }\r",
-													"  },\r",
-													"  \"required\": [\r",
-													"    \"idPessoa\",\r",
-													"    \"nomeMae\",\r",
-													"    \"idEstadoCivil\",\r",
-													"    \"idNacionalidade\",\r",
-													"    \"email\",\r",
-													"    \"salario\",\r",
-													"    \"impedidoFinanciamento\",\r",
-													"    \"naturalidadeCidade\",\r",
-													"    \"naturalidadeEstado\",\r",
-													"    \"grauInstrucao\",\r",
-													"    \"nomePai\",\r",
-													"    \"pessoaPoliticamenteExposta\",\r",
-													"    \"patrimonioTotal\",\r",
-													"    \"flagNomePaiNaoInformado\",\r",
-													"    \"flagSemEnderecoComercialFixo\"\r",
-													"  ]\r",
-													"}\r",
-													");\r",
-													""
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -1311,7 +1650,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/1598",
+											"raw": "https://{{integrationURL}}/pessoas-detalhes/api/pessoas-detalhes/3232",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -1320,7 +1659,7 @@
 												"pessoas-detalhes",
 												"api",
 												"pessoas-detalhes",
-												"1598"
+												"3232"
 											]
 										}
 									},
@@ -2322,28 +2661,6 @@
 					]
 				}
 			]
-		}
-	],
-	"variable": [
-		{
-			"key": "current",
-			"value": ""
-		},
-		{
-			"key": "ids",
-			"value": ""
-		},
-		{
-			"key": "requests",
-			"value": ""
-		},
-		{
-			"key": "count",
-			"value": ""
-		},
-		{
-			"key": "id",
-			"value": ""
 		}
 	]
 }
