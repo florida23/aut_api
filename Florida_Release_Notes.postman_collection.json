@@ -346,7 +346,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=1323&ddd=11&telefone=991882511&ramal=10",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa=1323&ddd=11&telefone=rrrrrrrrr&ramal=10",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -371,7 +371,238 @@
 												},
 												{
 													"key": "telefone",
-													"value": "991882511"
+													"value": "rrrrrrrrr"
+												},
+												{
+													"key": "ramal",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER138 - POST: /api/telefones_letra_idPessoa(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var id_pessoa = \"A\";\r",
+													"pm.globals.set(\"id_pessoa\", id_pessoa);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa={{id_pessoa}}&ddd=11&telefone=rrrrrrrrr&ramal=10",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idTipoTelefone",
+													"value": "1"
+												},
+												{
+													"key": "idPessoa",
+													"value": "{{id_pessoa}}"
+												},
+												{
+													"key": "ddd",
+													"value": "11"
+												},
+												{
+													"key": "telefone",
+													"value": "rrrrrrrrr"
+												},
+												{
+													"key": "ramal",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER138 - POST: /api/telefones_branco_idPessoa(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var id_pessoa = \"\";\r",
+													"pm.globals.set(\"id_pessoa\", id_pessoa);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa={{id_pessoa}}&ddd=11&telefone=rrrrrrrrr&ramal=10",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idTipoTelefone",
+													"value": "1"
+												},
+												{
+													"key": "idPessoa",
+													"value": "{{id_pessoa}}"
+												},
+												{
+													"key": "ddd",
+													"value": "11"
+												},
+												{
+													"key": "telefone",
+													"value": "rrrrrrrrr"
+												},
+												{
+													"key": "ramal",
+													"value": "10"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER138 - POST: /api/telefones_inexistente_idPessoa(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"O participante informado é inexistente\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var id_pessoa = 5900777777;\r",
+													"pm.globals.set(\"id_pessoa\", id_pessoa);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"strictSSL": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone=1&idPessoa={{id_pessoa}}&ddd=11&telefone=rrrrrrrrr&ramal=10",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"telefones",
+												"api",
+												"telefones"
+											],
+											"query": [
+												{
+													"key": "idTipoTelefone",
+													"value": "1"
+												},
+												{
+													"key": "idPessoa",
+													"value": "{{id_pessoa}}"
+												},
+												{
+													"key": "ddd",
+													"value": "11"
+												},
+												{
+													"key": "telefone",
+													"value": "rrrrrrrrr"
 												},
 												{
 													"key": "ramal",
