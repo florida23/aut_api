@@ -24,7 +24,59 @@
 												"exec": [
 													"pm.test(\"Status code is 200\", function () {\r",
 													"    pm.response.to.have.status(200);\r",
-													"});"
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.ok;\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"// Função para gerar um número aleatório entre dois valores\r",
+													"function getRandomNumber(min, max) {\r",
+													"    return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+													"}\r",
+													"\r",
+													"// Função para gerar um CPF válido\r",
+													"function generateCPF() {\r",
+													"    var n1 = getRandomNumber(0, 9);\r",
+													"    var n2 = getRandomNumber(0, 9);\r",
+													"    var n3 = getRandomNumber(0, 9);\r",
+													"    var n4 = getRandomNumber(0, 9);\r",
+													"    var n5 = getRandomNumber(0, 9);\r",
+													"    var n6 = getRandomNumber(0, 9);\r",
+													"    var n7 = getRandomNumber(0, 9);\r",
+													"    var n8 = getRandomNumber(0, 9);\r",
+													"    var n9 = getRandomNumber(0, 9);\r",
+													"    var d1 = n9 * 2 + n8 * 3 + n7 * 4 + n6 * 5 + n5 * 6 + n4 * 7 + n3 * 8 + n2 * 9 + n1 * 10;\r",
+													"    d1 = 11 - (d1 % 11);\r",
+													"    if (d1 >= 10) {\r",
+													"        d1 = 0;\r",
+													"    }\r",
+													"    var d2 = d1 * 2 + n9 * 3 + n8 * 4 + n7 * 5 + n6 * 6 + n5 * 7 + n4 * 8 + n3 * 9 + n2 * 10 + n1 * 11;\r",
+													"    d2 = 11 - (d2 % 11);\r",
+													"    if (d2 >= 10) {\r",
+													"        d2 = 0;\r",
+													"    }\r",
+													"    return '' + n1 + n2 + n3 + n4 + n5 + n6 + n7 + n8 + n9 + d1 + d2;\r",
+													"}\r",
+													"\r",
+													"// Gerar CPF aleatório\r",
+													"var randomCPF = generateCPF();\r",
+													"\r",
+													"// Definir CPF gerado como variável global convertida em string\r",
+													"pm.globals.set(\"generatedCPF\", randomCPF.toString());\r",
+													"\r",
+													"console.log(\"CPF gerado: \" + randomCPF);\r",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -35,7 +87,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"cpf\": \"09656853067\",\n    \"nome\": \"Julia Teste\",\n    \"nomeMae\": \"Ana Souza\",\n    \"nomePai\": \"João Souza\",\n    \"dataNascimento\": \"1995-05-01\",\n    \"sexo\": \"F\",\n    \"idNacionalidade\": 1,\n    \"numeroIdentidade\": \"97549788\",\n    \"dataEmissaoIdentidade\": \"1995-03-03\",\n    \"dataEmissaoCnh\": \"1995-03-03\",\n    \"orgaoExpedidorIdentidade\": \"SSP\",\n    \"numeroCNH\": \"32134354343\",\n    \"unidadeFederativaIdentidade\": \"SP\",\n    \"naturalidadeCidade\": \"São Paulo\",\n    \"naturalidadeEstado\": \"SP\", \n    \"codigoRamoAtividade\": 0,\n    \"valorRenda\": 1000,\n    \"patrimonioTotal\": 0,\n    \"email\": \"email@email.com\",\n    \"idEstabelecimento\": 0,\n    \"idEstadoCivil\": 1,\n    \"matricula\": 0,\n    \"idPromotorVenda\": 55,\n    \"tokenIndicacaoAmigo\": \"t1\",\n    \"valorPontuacao\": 0,\n    \"encaminharCartaoEndereco\": true,\n    \"pessoaPoliticamenteExposta\": true,\n    \"canalEntrada\": \"Canal_TESTE\",\n    \"deficienteVisual\": true,\n    \"telefones\": [\n        {\n        \"idTipoTelefone\": 3,\n        \"ddd\": 21,\n        \"telefone\": \"991882566\",\n        \"ramal\": \"22\"\n        }\n    ],\n    \"enderecos\": [\n        {\n        \"idTipoEndereco\": 1,\n        \"logradouro\": \"Paulista\",\n        \"complemento\": \"22A\",\n        \"bairro\": \"Centro\",\n        \"numero\": \"122\",\n        \"cep\": \"02266000\",\n        \"pontoReferencia\": \"Prox Parque\",\n        \"cidade\": \"São Paulo\",\n        \"uf\": \"SP\",\n        \"pais\": \"Brasil\",\n        \"enderecoCorrespondencia\": true\n        }\n    ],\n    \"conta\": {\n        \"idProduto\": 1,\n        \"idOrigemComercial\": 99,\n        \"diaVencimento\": 10,\n        \"limiteGlobal\": 777,\n        \"limiteMaximo\": 1234,\n        \"limiteParcelas\": 1234,\n        \"limiteConsignado\": 1234,\n        \"faturaPorEmail\": true,\n        \"pacoteTarifa\": 1,\n        \"flagCreditoAtivo\": true,\n        \"flagDebitoAtivo\": true,\n        \"flagPLDiferenciado\": true,\n        \"flagOverLimit\": true,\n        \"flagCarteiraDigital\": true,\n        \"bonusCelular\": {\n        \"codigoOperadora\": 1,\n        \"ddd\": 11,\n        \"celular\": \"998556322\"\n        },\n        \"adicionais\": [\n        \n\t\t\t]\n    },\n    \"assinaturaCliente\": \"string\",\n    \"neurotech\": {\n        \"imagesProcessId\": \"string\",\n        \"fotoBiometriaContingencia\": true,\n        \"fotoBiometriaRepositorio\": true,\n        \"fotoDocumentoContingencia\": true,\n        \"fotoDocumentoRepositorio\": true,\n        \"tokenAppStatus\": \"string\",\n        \"tokenAppReenvio\": \"string\",\n        \"tokenAppInvalido\": \"string\"\n    }\n}",
+											"raw": "{\n    \"cpf\": \"{{generatedCPF}}\",\n    \"nome\": \"Julia Teste\",\n    \"nomeMae\": \"Ana Souza\",\n    \"nomePai\": \"João Souza\",\n    \"dataNascimento\": \"1995-05-01\",\n    \"sexo\": \"F\",\n    \"idNacionalidade\": 1,\n    \"numeroIdentidade\": \"97549788\",\n    \"dataEmissaoIdentidade\": \"1995-03-03\",\n    \"dataEmissaoCnh\": \"1995-03-03\",\n    \"orgaoExpedidorIdentidade\": \"SSP\",\n    \"numeroCNH\": \"32134354343\",\n    \"unidadeFederativaIdentidade\": \"SP\",\n    \"naturalidadeCidade\": \"São Paulo\",\n    \"naturalidadeEstado\": \"SP\", \n    \"codigoRamoAtividade\": 0,\n    \"valorRenda\": 1000,\n    \"patrimonioTotal\": 0,\n    \"email\": \"email@email.com\",\n    \"idEstabelecimento\": 0,\n    \"idEstadoCivil\": 1,\n    \"matricula\": 0,\n    \"idPromotorVenda\": 55,\n    \"tokenIndicacaoAmigo\": \"t1\",\n    \"valorPontuacao\": 0,\n    \"encaminharCartaoEndereco\": true,\n    \"pessoaPoliticamenteExposta\": true,\n    \"canalEntrada\": \"Canal_TESTE\",\n    \"deficienteVisual\": true,\n    \"telefones\": [\n        {\n        \"idTipoTelefone\": 3,\n        \"ddd\": 21,\n        \"telefone\": \"991882566\",\n        \"ramal\": \"22\"\n        }\n    ],\n    \"enderecos\": [\n        {\n        \"idTipoEndereco\": 1,\n        \"logradouro\": \"Paulista\",\n        \"complemento\": \"22A\",\n        \"bairro\": \"Centro\",\n        \"numero\": \"122\",\n        \"cep\": \"02266000\",\n        \"pontoReferencia\": \"Prox Parque\",\n        \"cidade\": \"São Paulo\",\n        \"uf\": \"SP\",\n        \"pais\": \"Brasil\",\n        \"enderecoCorrespondencia\": true\n        }\n    ],\n    \"conta\": {\n        \"idProduto\": 1,\n        \"idOrigemComercial\": 99,\n        \"diaVencimento\": 10,\n        \"limiteGlobal\": 777,\n        \"limiteMaximo\": 1234,\n        \"limiteParcelas\": 1234,\n        \"limiteConsignado\": 1234,\n        \"faturaPorEmail\": true,\n        \"pacoteTarifa\": 1,\n        \"flagCreditoAtivo\": true,\n        \"flagDebitoAtivo\": true,\n        \"flagPLDiferenciado\": true,\n        \"flagOverLimit\": true,\n        \"flagCarteiraDigital\": true,\n        \"bonusCelular\": {\n        \"codigoOperadora\": 1,\n        \"ddd\": 11,\n        \"celular\": \"998556322\"\n        },\n        \"adicionais\": [\n        \n\t\t\t]\n    },\n    \"assinaturaCliente\": \"string\",\n    \"neurotech\": {\n        \"imagesProcessId\": \"string\",\n        \"fotoBiometriaContingencia\": true,\n        \"fotoBiometriaRepositorio\": true,\n        \"fotoDocumentoContingencia\": true,\n        \"fotoDocumentoRepositorio\": true,\n        \"tokenAppStatus\": \"string\",\n        \"tokenAppReenvio\": \"string\",\n        \"tokenAppInvalido\": \"string\"\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -111,6 +163,462 @@
 												{
 													"key": "idPessoa",
 													"value": "264"
+												},
+												{
+													"key": "idTipoEndereco",
+													"value": "4"
+												},
+												{
+													"key": "cep",
+													"value": "01500005"
+												},
+												{
+													"key": "logradouro",
+													"value": "Avenida Paulista"
+												},
+												{
+													"key": "numero",
+													"value": "1501"
+												},
+												{
+													"key": "complemento",
+													"value": "Apto 100"
+												},
+												{
+													"key": "pontoReferencia",
+													"value": "Em frente ao posto de gasolina"
+												},
+												{
+													"key": "bairro",
+													"value": "Bela Vista"
+												},
+												{
+													"key": "cidade",
+													"value": "São Paulo"
+												},
+												{
+													"key": "uf",
+													"value": "SP"
+												},
+												{
+													"key": "pais",
+													"value": "Brasil"
+												},
+												{
+													"key": "tempoResidenciaAnos",
+													"value": "2"
+												},
+												{
+													"key": "tempoResidenciaMeses",
+													"value": "8"
+												},
+												{
+													"key": "aplicativoAlteracao",
+													"value": "string"
+												},
+												{
+													"key": "usuarioAlteracao",
+													"value": "Aguiar"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER118 - POST: /api/enderecos/id_pessoa_branco(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=&idTipoEndereco=4&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=Aguiar",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"enderecos",
+												"api",
+												"enderecos"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": ""
+												},
+												{
+													"key": "idTipoEndereco",
+													"value": "4"
+												},
+												{
+													"key": "cep",
+													"value": "01500005"
+												},
+												{
+													"key": "logradouro",
+													"value": "Avenida Paulista"
+												},
+												{
+													"key": "numero",
+													"value": "1501"
+												},
+												{
+													"key": "complemento",
+													"value": "Apto 100"
+												},
+												{
+													"key": "pontoReferencia",
+													"value": "Em frente ao posto de gasolina"
+												},
+												{
+													"key": "bairro",
+													"value": "Bela Vista"
+												},
+												{
+													"key": "cidade",
+													"value": "São Paulo"
+												},
+												{
+													"key": "uf",
+													"value": "SP"
+												},
+												{
+													"key": "pais",
+													"value": "Brasil"
+												},
+												{
+													"key": "tempoResidenciaAnos",
+													"value": "2"
+												},
+												{
+													"key": "tempoResidenciaMeses",
+													"value": "8"
+												},
+												{
+													"key": "aplicativoAlteracao",
+													"value": "string"
+												},
+												{
+													"key": "usuarioAlteracao",
+													"value": "Aguiar"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER118 - POST: /api/enderecos/id_pessoa_letra(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=A&idTipoEndereco=4&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=Aguiar",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"enderecos",
+												"api",
+												"enderecos"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "A"
+												},
+												{
+													"key": "idTipoEndereco",
+													"value": "4"
+												},
+												{
+													"key": "cep",
+													"value": "01500005"
+												},
+												{
+													"key": "logradouro",
+													"value": "Avenida Paulista"
+												},
+												{
+													"key": "numero",
+													"value": "1501"
+												},
+												{
+													"key": "complemento",
+													"value": "Apto 100"
+												},
+												{
+													"key": "pontoReferencia",
+													"value": "Em frente ao posto de gasolina"
+												},
+												{
+													"key": "bairro",
+													"value": "Bela Vista"
+												},
+												{
+													"key": "cidade",
+													"value": "São Paulo"
+												},
+												{
+													"key": "uf",
+													"value": "SP"
+												},
+												{
+													"key": "pais",
+													"value": "Brasil"
+												},
+												{
+													"key": "tempoResidenciaAnos",
+													"value": "2"
+												},
+												{
+													"key": "tempoResidenciaMeses",
+													"value": "8"
+												},
+												{
+													"key": "aplicativoAlteracao",
+													"value": "string"
+												},
+												{
+													"key": "usuarioAlteracao",
+													"value": "Aguiar"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER118 - POST: /api/enderecos/id_pessoa_caractere_especial(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=$%26*@&idTipoEndereco=4&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=Aguiar",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"enderecos",
+												"api",
+												"enderecos"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "$&*@"
+												},
+												{
+													"key": "idTipoEndereco",
+													"value": "4"
+												},
+												{
+													"key": "cep",
+													"value": "01500005"
+												},
+												{
+													"key": "logradouro",
+													"value": "Avenida Paulista"
+												},
+												{
+													"key": "numero",
+													"value": "1501"
+												},
+												{
+													"key": "complemento",
+													"value": "Apto 100"
+												},
+												{
+													"key": "pontoReferencia",
+													"value": "Em frente ao posto de gasolina"
+												},
+												{
+													"key": "bairro",
+													"value": "Bela Vista"
+												},
+												{
+													"key": "cidade",
+													"value": "São Paulo"
+												},
+												{
+													"key": "uf",
+													"value": "SP"
+												},
+												{
+													"key": "pais",
+													"value": "Brasil"
+												},
+												{
+													"key": "tempoResidenciaAnos",
+													"value": "2"
+												},
+												{
+													"key": "tempoResidenciaMeses",
+													"value": "8"
+												},
+												{
+													"key": "aplicativoAlteracao",
+													"value": "string"
+												},
+												{
+													"key": "usuarioAlteracao",
+													"value": "Aguiar"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER118 - POST: /api/enderecos/id_pessoa_nao_encontrado(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.message\", \"O participante informado é inexistente\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=999999&idTipoEndereco=4&cep=01500005&logradouro=Avenida Paulista&numero=1501&complemento=Apto 100&pontoReferencia=Em frente ao posto de gasolina&bairro=Bela Vista&cidade=São Paulo&uf=SP&pais=Brasil&tempoResidenciaAnos=2&tempoResidenciaMeses=8&aplicativoAlteracao=string&usuarioAlteracao=Aguiar",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"enderecos",
+												"api",
+												"enderecos"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "999999"
 												},
 												{
 													"key": "idTipoEndereco",
@@ -409,11 +917,6 @@
 												"exec": [
 													"pm.test(\"Status code is 400\", function () {\r",
 													"    pm.response.to.have.status(400);\r",
-													"});\r",
-													"\r",
-													"const responseJson = pm.response.json();\r",
-													"pm.test(\"Check o dominio 'idTipoEndereco' 1..5\", function() {\r",
-													"    pm.expect(responseJson.idTipoEndereco).to.be.oneOf([1, 2, 3, 4, 5]);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Validar mensagem de erro\", function () {\r",
@@ -3236,6 +3739,15 @@
 													"    pm.response.to.be.withBody;\r",
 													"    pm.response.to.be.json;\r",
 													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
 												],
 												"type": "text/javascript"
 											}
