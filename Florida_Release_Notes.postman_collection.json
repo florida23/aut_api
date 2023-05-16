@@ -1606,7 +1606,23 @@
 													"     pm.response.to.be.ok;\r",
 													"     pm.response.to.be.withBody;\r",
 													"     pm.response.to.be.json;\r",
-													"});"
+													"});\r",
+													"\r",
+													"// Verificar se o campo \"content\" não está vazio\r",
+													"pm.test(\"Validar se conteudo não está vazio\", function () {\r",
+													"    pm.expect(pm.response.json().content.length).to.be.greaterThan(0);\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -1704,6 +1720,130 @@
 												{
 													"key": "idPessoa",
 													"value": "0"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER117 - GET: /api/enderecos_idPessoa_letra(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=a",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"enderecos",
+												"api",
+												"enderecos"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": "a"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PIER117 - GET: /api/enderecos_idPessoa_vazio(-)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"A resposta é valida e deve ter um corpo\", function () {\r",
+													"     pm.response.to.be.withBody;\r",
+													"     pm.response.to.be.json;\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Validar mensagem de erro\", function () {\r",
+													"  pm.response.to.have.jsonBody(\"error.errors[0].message\", \"deve ser um número\");\r",
+													"});\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://{{integrationURL}}/enderecos/api/enderecos?idPessoa=",
+											"protocol": "https",
+											"host": [
+												"{{integrationURL}}"
+											],
+											"path": [
+												"enderecos",
+												"api",
+												"enderecos"
+											],
+											"query": [
+												{
+													"key": "idPessoa",
+													"value": ""
 												}
 											]
 										}
