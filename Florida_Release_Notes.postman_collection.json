@@ -5746,7 +5746,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone={{tpfone}}&idPessoa=1323&ddd=11&telefone=991882511&ramal={{letra}}",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone={{tpfone}}&idPessoa=1323&ddd=11&telefone=991882511&ramal=22",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -5775,7 +5775,7 @@
 												},
 												{
 													"key": "ramal",
-													"value": "{{letra}}"
+													"value": "22"
 												}
 											]
 										}
@@ -5825,7 +5825,7 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone={{tpfone}}&idPessoa=1323&ddd=11&telefone=991882511&ramal={{letra}}",
+											"raw": "https://{{integrationURL}}/telefones/api/telefones?idTipoTelefone={{tpfone}}&idPessoa=1323&ddd=11&telefone=991882511&ramal=22",
 											"protocol": "https",
 											"host": [
 												"{{integrationURL}}"
@@ -5854,7 +5854,7 @@
 												},
 												{
 													"key": "ramal",
-													"value": "{{letra}}"
+													"value": "22"
 												}
 											]
 										}
